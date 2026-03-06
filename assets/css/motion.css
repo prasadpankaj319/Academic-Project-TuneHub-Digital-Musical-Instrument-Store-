@@ -1,0 +1,206 @@
+﻿/*
+ * TuneHub Advanced Motion & Animations (motion.css)
+ */
+
+/* =========================================
+   Phase 1: Deep Interactive Backgrounds
+========================================= */
+
+/* Canvas Visualizer underlying everything smoothly */
+#bg-visualizer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+    pointer-events: none;
+    /* Let clicks pass through */
+    opacity: 0.08;
+    /* Low opacity so it never distracts */
+}
+
+/* Animated CSS Mesh for Hero */
+.hero-animated-mesh {
+    background: linear-gradient(-45deg, var(--primary-color), var(--secondary-color), #0B2447, #285B8F);
+    background-size: 400% 400%;
+    animation: gradientMeshMorph 15s ease infinite;
+    color: #FFFFFF !important;
+    padding: 100px 0;
+    border-radius: 1rem;
+    position: relative;
+    overflow: hidden;
+    box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.5);
+}
+
+@keyframes gradientMeshMorph {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* Dynamic Ambient Glows (Stage Lighting) */
+.ambient-glow {
+    position: fixed;
+    z-index: -1;
+    filter: blur(150px);
+    border-radius: 50%;
+    pointer-events: none;
+    opacity: 0.6;
+}
+
+.ambient-glow-green {
+    background-color: var(--primary-color);
+    width: 600px;
+    height: 600px;
+    top: -200px;
+    left: -200px;
+}
+
+.ambient-glow-blue {
+    background-color: var(--accent-color);
+    width: 600px;
+    height: 600px;
+    bottom: -200px;
+    right: -200px;
+}
+
+/* =========================================
+   Phase 2: Complex Interaction Animations
+========================================= */
+
+/* Dynamic Preloader (Masking Screen) */
+#tunehub-preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--bg-color);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.8s ease-out, visibility 0.8s ease-out;
+}
+
+#tunehub-preloader.fade-out {
+    opacity: 0;
+    visibility: hidden;
+}
+
+/* Audio Equalizer CSS Bouncing effect */
+.equalizer {
+    display: flex;
+    align-items: flex-end;
+    gap: 8px;
+    height: 60px;
+}
+
+.equalizer-bar {
+    width: 12px;
+    background-color: var(--primary-color);
+    border-radius: 4px;
+    animation: equalize 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) infinite;
+}
+
+.equalizer-bar:nth-child(2) {
+    animation-delay: 0.1s;
+    background-color: var(--secondary-color);
+}
+
+.equalizer-bar:nth-child(3) {
+    animation-delay: 0.3s;
+    background-color: var(--accent-color);
+}
+
+.equalizer-bar:nth-child(4) {
+    animation-delay: 0.2s;
+    background-color: var(--secondary-color);
+}
+
+.equalizer-bar:nth-child(5) {
+    animation-delay: 0.4s;
+    background-color: var(--primary-color);
+}
+
+@keyframes equalize {
+
+    0%,
+    100% {
+        height: 10px;
+    }
+
+    50% {
+        height: 60px;
+    }
+}
+
+/* Staggered Grid Reveal (Wait for JS to add delay) */
+.stagger-item {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.stagger-item.revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Add to Cart Parabolic Flight Clone object */
+.flight-clone {
+    position: fixed;
+    z-index: 1050;
+    pointer-events: none;
+    border-radius: 8px;
+    /* Assuming cards have slightly rounded images */
+    box-shadow: 0 10px 25px rgba(40, 91, 143, 0.6);
+    /* Transition for X and Y coordinate logic defined via inline styles or requestAnimationFrame in JS */
+    transition: width 0.8s ease, height 0.8s ease, opacity 0.8s ease, border-radius 0.8s ease;
+}
+
+/* =========================================
+   Phase 3: Video Hover Previews
+========================================= */
+
+.tutorial-card {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.4s ease;
+}
+
+.tutorial-card:hover {
+    transform: scale(1.05);
+    z-index: 10;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+.tutorial-video-preview {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    /* Hidden initially, JS will fade it in */
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+    /* Ignore mouse over the video itself so wrapper keeps hover */
+    z-index: 2;
+}
+
+.tutorial-card:hover .tutorial-video-preview {
+    opacity: 1;
+}
